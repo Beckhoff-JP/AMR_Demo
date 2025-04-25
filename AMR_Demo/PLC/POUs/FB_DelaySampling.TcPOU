@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_DelaySampling" Id="{ef17dc93-d612-4d7e-93b1-556a8a6188ca}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_DelaySampling
+VAR_INPUT
+	udiDelaySampling	: UDINT;
+	diData				: DINT;
+END_VAR
+VAR_OUTPUT
+	diOutData		: DINT;
+END_VAR
+VAR
+	i				: UDINT;
+	diDelayData		: ARRAY[0..1000] OF DINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//Get latest data
+diDelayData[0]:=diData;
+
+//Slide window
+FOR i:=udiDelaySampling TO 1 BY -1 DO
+	diDelayData[i] := diDelayData[i -1];
+END_FOR
+
+diOutData := diDelayData[udiDelaySampling];
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

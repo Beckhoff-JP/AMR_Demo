@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="MAIN" Id="{51fb128e-0b29-449f-81b5-c1bdf5c46aab}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	
+	stAxis				: ARRAY[1..2] OF AXIS_REF;
+	fbMcPower			: ARRAY[1..2] OF MC_Power;
+	fbMcReset			: ARRAY[1..2] OF MC_Reset;
+	fbMcMoveVelocity	: ARRAY[1..2] OF MC_MoveVelocity;
+	fbMcHalt			: ARRAY[1..2] OF MC_Halt;
+	
+	bPower		: BOOL;
+	bRun		: BOOL;
+	bStop		: BOOL;
+	bMcReset		AT%I*	: BOOL;
+	bSafetyReset	AT%Q*	: BOOL;
+	bSafetyRun		AT%Q*	: BOOL := TRUE;
+	bSafetyErrAck	AT%Q*	: BOOL;
+	diSpeed			AT%Q*	: DINT;
+	
+	bWarningSigna0l		AT%I*	: BOOL;
+	bWarningSigna02		AT%I*	: BOOL;
+	
+	lrOverride		: LREAL := 50;
+	lrVelocity		: LREAL := 360.0;
+	lrGearRate		: LREAL := 10;
+	lrIncrement		: LREAL := 1048576;
+	lrWheelIncrement	:LREAL;
+	lrExtEncoderIncrement		: LREAL := 1000;
+	
+	diTaskIdx			: DINT;
+	udiCycletime		: UDINT;
+	udiTimeIntervel		: UDINT;
+	udiCycleCount		: UDINT;
+	fbDelaySampling		: FB_DelaySampling;
+	
+	diPosition			: DINT;
+	diPositionBuffer	: DINT;
+	
+	Mode	: INT;
+	i		: INT;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+FOR i:=1 TO 2 DO
+	fbMcPower[i](
+	Axis:= stAxis[i], 
+	Enable:= bPower, 
+	Enable_Positive:= bPower, 
+	Enable_Negative:= bPower,
+	Override := lrOverride);
+
+	fbMcHalt[i](
+		Axis:= stAxis[i], 
+		Execute:= bStop, 
+		Deceleration:= 3600);
+	
+	fbMcReset[i](
+		Axis:= stAxis[i], 
+		Execute:= bMcReset);
+	
+	fbMcMoveVelocity[i](
+		Axis:= stAxis[i],
+		Execute:= bRun,
+		Velocity:= lrVelocity, 
+		Direction:= MC_Direction.MC_Positive_Direction, 
+		BufferMode:= MC_BufferMode.MC_Aborting);
+END_FOR
+
+
+bSafetyReset := bMcReset;
+bSafetyErrAck := bMcReset;
+IF bMcReset THEN
+	Mode := AreaStatus.Safe;
+END_IF
+
+IF NOT bWarningSigna0l THEN
+	Mode := AreaStatus.Warning_Level1;
+	IF NOT bWarningSigna02 THEN
+		Mode := AreaStatus.Warning_Level2;
+	END_IF
+ELSIF (stAxis[1].NcToPlc.ErrorCode <> 0) OR (stAxis[2].NcToPlc.ErrorCode <> 0) THEN
+	Mode := AreaStatus.Hazard;
+ELSE
+	Mode := AreaStatus.Safe;
+END_IF
+
+CASE Mode OF
+
+	AreaStatus.Safe:
+						//lrOverride := 50;	
+						
+	AreaStatus.Warning_Level1:
+						lrOverride := 25;
+						
+	AreaStatus.Warning_Level2:
+						lrOverride := 10;
+						
+	AreaStatus.Hazard:
+						lrOverride := 0;
+	
+END_CASE
+
+
+lrWheelIncrement := lrIncrement * lrGearRate / 360;
+diPosition := LREAL_TO_DINT(-1 * stAxis[1].NcToPlc.ActPos * lrWheelIncrement / lrExtEncoderIncrement);
+diSpeed := diPosition - diPositionBuffer; 
+
+diTaskIdx := GETCURTASKINDEXEX();
+IF diTaskIdx > 0 THEN
+    udiCycleTime := _TaskInfo[diTaskIdx].CycleTime;
+	udiCycleCount := (udiTimeIntervel*10000) / udiCycleTime;
+END_IF
+fbDelaySampling(udiDelaySampling:= udiCycleCount, diData:= diPosition, diOutData=> diPositionBuffer);
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

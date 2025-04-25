@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="AreaStatus" Id="{8c582387-732b-4c80-971c-ac340dbc3e2a}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+{attribute 'to_string'}
+TYPE AreaStatus :
+(
+	Safe := 0,
+	Hazard := 1,
+	Warning_Level1 := 2,
+	Warning_Level2 := 3
+) := Safe;
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
