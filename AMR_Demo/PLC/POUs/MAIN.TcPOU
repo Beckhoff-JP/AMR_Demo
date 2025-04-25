@@ -17,13 +17,16 @@ VAR
 	bSafetyReset	AT%Q*	: BOOL;
 	bSafetyRun		AT%Q*	: BOOL := TRUE;
 	bSafetyErrAck	AT%Q*	: BOOL;
-	diSpeed			AT%Q*	: DINT;
+	diSpeedAct		AT%Q*	: DINT;
+	diSpeedCmd		AT%Q*	: DINT; 
 	
 	bWarningSigna0l		AT%I*	: BOOL;
 	bWarningSigna02		AT%I*	: BOOL;
+	Enc2ActError		AT%I*	: BOOL;
+	Enc2CmdError		AT%I*	: BOOL;
 	
 	lrOverride		: LREAL := 50;
-	lrVelocity		: LREAL := 360.0;
+	lrVelocity		: LREAL := 360;
 	lrGearRate		: LREAL := 10;
 	lrIncrement		: LREAL := 1048576;
 	lrWheelIncrement	:LREAL;
@@ -34,9 +37,12 @@ VAR
 	udiTimeIntervel		: UDINT;
 	udiCycleCount		: UDINT;
 	fbDelaySampling		: FB_DelaySampling;
+	fbDelaySamplingSet	: FB_DelaySampling;
 	
-	diPosition			: DINT;
-	diPositionBuffer	: DINT;
+	diPositionAct			: DINT;
+	diPositionBufferAct		: DINT;
+	diPositionCmd			: DINT;
+	diPositionBufferCmd		: DINT;
 	
 	Mode	: INT;
 	i		: INT;
@@ -91,7 +97,7 @@ END_IF
 CASE Mode OF
 
 	AreaStatus.Safe:
-						//lrOverride := 50;	
+						lrOverride := 50;	
 						
 	AreaStatus.Warning_Level1:
 						lrOverride := 25;
@@ -106,15 +112,18 @@ END_CASE
 
 
 lrWheelIncrement := lrIncrement * lrGearRate / 360;
-diPosition := LREAL_TO_DINT(-1 * stAxis[1].NcToPlc.ActPos * lrWheelIncrement / lrExtEncoderIncrement);
-diSpeed := diPosition - diPositionBuffer; 
+diPositionAct := LREAL_TO_DINT(-1 * stAxis[1].NcToPlc.ActPos * lrWheelIncrement / lrExtEncoderIncrement);
+diSpeedAct := diPositionAct - diPositionBufferAct; 
+diPositionCmd := LREAL_TO_DINT(-1 * stAxis[1].NcToPlc.ActPos * lrWheelIncrement / lrExtEncoderIncrement);
+diSpeedCmd := diPositionCmd - diPositionBufferCmd; 
 
 diTaskIdx := GETCURTASKINDEXEX();
 IF diTaskIdx > 0 THEN
     udiCycleTime := _TaskInfo[diTaskIdx].CycleTime;
 	udiCycleCount := (udiTimeIntervel*10000) / udiCycleTime;
 END_IF
-fbDelaySampling(udiDelaySampling:= udiCycleCount, diData:= diPosition, diOutData=> diPositionBuffer);
+fbDelaySampling(udiDelaySampling:= udiCycleCount, diData:= diPositionAct, diOutData=> diPositionBufferAct);
+fbDelaySamplingSet(udiDelaySampling:= udiCycleCount, diData:= diPositionCmd, diOutData=> diPositionBufferCmd);
 ]]></ST>
     </Implementation>
   </POU>
