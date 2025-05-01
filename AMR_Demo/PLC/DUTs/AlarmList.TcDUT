@@ -1,16 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <DUT Name="AreaStatus" Id="{8c582387-732b-4c80-971c-ac340dbc3e2a}">
+  <DUT Name="AlarmList" Id="{e838e5c6-f57b-4165-8f8f-acd96c37ea14}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
 {attribute 'to_string'}
-TYPE AreaStatus :
+TYPE AlarmList :
 (
-	Safe := 0,
-	Warning_Level1 := 1,
-	Warning_Level2 := 2,
-	Hazard := 3
-) := Safe;
+	emergency_stop := 1,
+	encoder_error,
+	approach,
+	proximity,
+	collision
+);
 END_TYPE
 ]]></Declaration>
   </DUT>
