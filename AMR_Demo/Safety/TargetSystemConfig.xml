@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TargetSystemConfig Crc="3864027170" Version="1.5">
+<TargetSystemConfig Crc="4067661214" Version="1.5">
   <TargetSystemType>HSafetyPLC</TargetSystemType>
   <TargetSystemSubType>ELM891x</TargetSystemSubType>
   <IsExternalDevice>false</IsExternalDevice>
   <TargetSystemObjectId>50462728</TargetSystemObjectId>
   <TargetSystemObjectName>Term 8 (ELM7212-9018)</TargetSystemObjectName>
-  <SoftwareVersion />
-  <SerialNumber />
-  <ProjectCRC>23203</ProjectCRC>
+  <SoftwareVersion>01 (V01.02)</SoftwareVersion>
+  <SerialNumber>4355504</SerialNumber>
+  <ProjectCRC>37021</ProjectCRC>
   <MapProjectCRC>false</MapProjectCRC>
   <MapSerialNumber>false</MapSerialNumber>
   <VersionNumber>1</VersionNumber>
   <FSOEAddress>3</FSOEAddress>
-  <DipSwitch />
+  <DipSwitch>3</DipSwitch>
   <AmsNetID>5.69.67.250.3.1</AmsNetID>
   <AmsPort>1008</AmsPort>
   <ConnectionInfoDataConfigOld>false</ConnectionInfoDataConfigOld>

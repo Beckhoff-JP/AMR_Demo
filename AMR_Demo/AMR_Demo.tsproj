@@ -1597,6 +1597,34 @@ External Setpoint Generation:
 			</ArrayInfo>
 		</DataType>
 		<DataType>
+			<Name GUID="{2438F91B-E188-4ED7-8594-54354F9ED6A4}" Namespace="Safety" TcBaseType="true">FSOE_6</Name>
+			<BitSize>48</BitSize>
+			<SubItem>
+				<Name>FSoE CMD</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000002}">USINT</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>FSoE Data</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000032}">BITARR8</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>8</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>FSoE CRC_0</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>FSoE ConnID</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>32</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
 			<Name GUID="{7AEB03EB-2534-436E-B570-D33A68424551}" PersistentType="true">NewType</Name>
 			<BitSize>8</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
@@ -1991,7 +2019,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{2DFE7A75-9361-4018-9E9B-9E9C9C2E9DC6}" Name="PLC" PrjFilePath="PLC\PLC.plcproj" TmcFilePath="PLC\PLC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{A11A1FEA-876F-524D-D112-D748CEA95164}" TmcPath="PLC\PLC.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{6D1392B5-40FC-1CEB-4406-CB3DD8A3CAE8}" TmcPath="PLC\PLC.tmc">
 					<Name>PLC Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" AreaNo="1">
@@ -3730,8 +3758,8 @@ External Setpoint Generation:
 							<SyncMan>001614002000010004000000000000001400001620010000</SyncMan>
 							<SyncMan>001a00002400000003000000000000000000001a24000000</SyncMan>
 							<SyncMan>001c00002000000004000000000000000000001c20000000</SyncMan>
-							<SyncMan>001e1e002400010003000000000000000a00001e24010000</SyncMan>
-							<SyncMan>001f14002000010004000000000000000a00001f20010000</SyncMan>
+							<SyncMan>001e24002400010003000000000000000a00001e24010000</SyncMan>
+							<SyncMan>001f1a002000010004000000000000000a00001f20010000</SyncMan>
 							<Fmmu>0000000000000000001200020100000001000000060000000200000000000000</Fmmu>
 							<Fmmu>0000000000000000001600010100000002000000060000000300000000000000</Fmmu>
 							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
@@ -5109,7 +5137,41 @@ Bit 8 - 15 : reserved]]></Comment>
 									<Type>UINT</Type>
 								</Entry>
 							</Pdo>
-							<Pdo Name="SAFETY FSoE Connection 3 Send Message" Index="#x1aa2" Flags="#x0080" SyncUnit="2"/>
+							<Pdo Name="SAFETY FSoE Connection 3 Send Message" Index="#x1aa2" Flags="#x0080" SyncMan="7" SyncUnit="2">
+								<Entry Name="Message_11__FSoE Cmd" BitLen="8" Index="#x6220" Sub="#x01">
+									<Type>USINT</Type>
+								</Entry>
+								<Entry Name="Message_11__Safe Data Byte 0[0]" BitLen="1" Index="#xf601" Sub="#x09">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Message_11__Safe Data Byte 0[1]" BitLen="1" Index="#xf601" Sub="#x0a">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Message_11__Safe Data Byte 0[2]" BitLen="1" Index="#xf601" Sub="#x0b">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Message_11__Safe Data Byte 0[3]" BitLen="1" Index="#xf601" Sub="#x0c">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Message_11__Safe Data Byte 0[4]" BitLen="1" Index="#xf601" Sub="#x0d">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Message_11__Safe Data Byte 0[5]" BitLen="1" Index="#xf601" Sub="#x0e">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Message_11__Safe Data Byte 0[6]" BitLen="1" Index="#xf601" Sub="#x0f">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Message_11__Safe Data Byte 0[7]" BitLen="1" Index="#xf601" Sub="#x10">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Message_11__FSoE CRC_0" BitLen="16" Index="#x6220" Sub="#x03">
+									<Type>UINT</Type>
+								</Entry>
+								<Entry Name="Message_11__FSoE ConnID" BitLen="16" Index="#x6220" Sub="#x02">
+									<Type>UINT</Type>
+								</Entry>
+							</Pdo>
 							<Pdo Name="SAFETY FSoE Connection 4 Send Message" Index="#x1aa3" Flags="#x0080" SyncUnit="2"/>
 							<Pdo Name="SAFETY FSoE Connection 5 Send Message" Index="#x1aa4" Flags="#x0080" SyncUnit="2"/>
 							<Pdo Name="SAFETY FSoE Connection 6 Send Message" Index="#x1aa5" Flags="#x0080" SyncUnit="2"/>
@@ -5296,7 +5358,41 @@ Bit 8 - 15 : reserved]]></Comment>
 									<Type>UINT</Type>
 								</Entry>
 							</Pdo>
-							<Pdo Name="SAFETY FSoE Connection 3 Receive Message" Index="#x16a2" InOut="1" Flags="#x0080" SyncUnit="2"/>
+							<Pdo Name="SAFETY FSoE Connection 3 Receive Message" Index="#x16a2" InOut="1" Flags="#x0080" SyncMan="6" SyncUnit="2">
+								<Entry Name="Message_11__FSoE Cmd" BitLen="8" Index="#x7220" Sub="#x01">
+									<Type>USINT</Type>
+								</Entry>
+								<Entry Name="Message_11__Safe Data Byte 0[0]" BitLen="1" Index="#xf701" Sub="#x11">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Message_11__Safe Data Byte 0[1]" BitLen="1" Index="#xf701" Sub="#x12">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Message_11__Safe Data Byte 0[2]" BitLen="1" Index="#xf701" Sub="#x13">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Message_11__Safe Data Byte 0[3]" BitLen="1" Index="#xf701" Sub="#x14">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Message_11__Safe Data Byte 0[4]" BitLen="1" Index="#xf701" Sub="#x15">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Message_11__Safe Data Byte 0[5]" BitLen="1" Index="#xf701" Sub="#x16">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Message_11__Safe Data Byte 0[6]" BitLen="1" Index="#xf701" Sub="#x17">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Message_11__Safe Data Byte 0[7]" BitLen="1" Index="#xf701" Sub="#x18">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Message_11__FSoE CRC_0" BitLen="16" Index="#x7220" Sub="#x03">
+									<Type>UINT</Type>
+								</Entry>
+								<Entry Name="Message_11__FSoE ConnID" BitLen="16" Index="#x7220" Sub="#x02">
+									<Type>UINT</Type>
+								</Entry>
+							</Pdo>
 							<Pdo Name="SAFETY FSoE Connection 4 Receive Message" Index="#x16a3" InOut="1" Flags="#x0080" SyncUnit="2"/>
 							<Pdo Name="SAFETY FSoE Connection 5 Receive Message" Index="#x16a4" InOut="1" Flags="#x0080" SyncUnit="2"/>
 							<Pdo Name="SAFETY FSoE Connection 6 Receive Message" Index="#x16a5" InOut="1" Flags="#x0080" SyncUnit="2"/>
@@ -5441,7 +5537,37 @@ Bit 8 - 15 : reserved]]></Comment>
 							<Type>UINT</Type>
 						</Var>
 					</Vars>
-					<Eap InOut="1" Mac="010105040000" ArpRetryInterval="1000"/>
+					<Eap InOut="1" Publisher="054543fa0101" ArpRetryInterval="1000">
+						<EapVar Id="1" VarInOut="1" NvId="1" NvLength="6">
+							<Name>Pub-Var-Safety</Name>
+							<ImageId>97</ImageId>
+							<Vars VarGrpType="1">
+								<Name>Inputs</Name>
+								<Var BoxStateVariable="true">
+									<Name>VarState</Name>
+									<Comment><![CDATA[0x0001 = Not sent (variable skipped)
+]]></Comment>
+									<Type>UINT</Type>
+									<BitOffs>16</BitOffs>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="2">
+								<Name>Outputs</Name>
+								<Var BoxStateVariable="true">
+									<Name>VarCtrl</Name>
+									<Comment><![CDATA[0x0001 = Disable publishing
+]]></Comment>
+									<Type>UINT</Type>
+									<BitOffs>16</BitOffs>
+								</Var>
+								<Var>
+									<Name>VarData</Name>
+									<Type GUID="{2438F91B-E188-4ED7-8594-54354F9ED6A4}" Namespace="Safety">FSOE_6</Type>
+									<BitOffs>32</BitOffs>
+								</Var>
+							</Vars>
+						</EapVar>
+					</Eap>
 				</Box>
 				<Box Id="11" BoxType="9052">
 					<Name>Box 11 (Subscriber)</Name>
@@ -5451,7 +5577,7 @@ Bit 8 - 15 : reserved]]></Comment>
 						<Var BoxStateVariable="true">
 							<Name>FrameState</Name>
 							<Type>UINT</Type>
-							<BitOffs>16</BitOffs>
+							<BitOffs>32</BitOffs>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2">
@@ -5459,10 +5585,53 @@ Bit 8 - 15 : reserved]]></Comment>
 						<Var BoxStateVariable="true">
 							<Name>FrameCtrl</Name>
 							<Type>UINT</Type>
-							<BitOffs>16</BitOffs>
+							<BitOffs>80</BitOffs>
 						</Var>
 					</Vars>
-					<Eap Mac="010105040000"/>
+					<Eap Publisher="052f4a420301">
+						<EapVar Id="1" NvId="1" NvLength="6">
+							<Name>Sub-Var-Safety</Name>
+							<ImageId>98</ImageId>
+							<Vars VarGrpType="1">
+								<Name>Inputs</Name>
+								<Var BoxStateVariable="true">
+									<Name>VarState</Name>
+									<Comment><![CDATA[0x0001 = Invalid hash value received
+0x0002 = Invalid variable length received
+]]></Comment>
+									<Type>UINT</Type>
+									<BitOffs>48</BitOffs>
+								</Var>
+								<Var>
+									<Name>Quality</Name>
+									<Comment><![CDATA[Duration the variable is not refreshed (in 100µs)]]></Comment>
+									<Type>UINT</Type>
+									<BitOffs>64</BitOffs>
+								</Var>
+								<Var>
+									<Name>CycleIndex</Name>
+									<Comment><![CDATA[Incremented each publisher cycle]]></Comment>
+									<Type>UINT</Type>
+									<BitOffs>80</BitOffs>
+								</Var>
+								<Var>
+									<Name>VarData</Name>
+									<Type GUID="{2438F91B-E188-4ED7-8594-54354F9ED6A4}" Namespace="Safety">FSOE_6</Type>
+									<BitOffs>96</BitOffs>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="2">
+								<Name>Outputs</Name>
+								<Var BoxStateVariable="true">
+									<Name>VarCtrl</Name>
+									<Comment><![CDATA[0x0001 = Ignore hash value
+]]></Comment>
+									<Type>UINT</Type>
+									<BitOffs>96</BitOffs>
+								</Var>
+							</Vars>
+						</EapVar>
+					</Eap>
 				</Box>
 				<Ethernet DeviceDesc="igb0"/>
 				<Eap EapDeviceGuid="{4EDBBB4F-1127-4107-A93A-6F031626FCEB}"/>
@@ -5471,11 +5640,18 @@ Bit 8 - 15 : reserved]]></Comment>
 	</Project>
 	<Mappings>
 		<MappingInfo Identifier="{00000000-2001-0850-0020-500821000403}" Id="#x02030030"/>
+		<MappingInfo Identifier="{00000000-0020-0304-2100-040350000403}" Id="#x02030060"/>
 		<MappingInfo Identifier="{00000000-0030-0304-1000-040330000403}" Id="#x02030020"/>
 		<MappingInfo Identifier="{00000000-0040-0304-1000-040342000403}" Id="#x02030040"/>
 		<MappingInfo Identifier="{05000010-2001-0850-1000-040300205008}" Id="#x02030050" Watchdog="14000000040000000400000004000000"/>
 		<MappingInfo Identifier="{03040020-0020-0304-2000-040320000403}" Id="#x02030010" Watchdog="04000000040000000400000004000000"/>
 		<OwnerA Name="TIID^Device 2 (EtherCAT)">
+			<OwnerB Name="TIID^Device 1 (EtherCAT Automation Protocol)^Box 10 (Publisher)">
+				<Link VarA="Term 1 (EK1100)^Term 8 (ELM7212-9018)^Module 1 (SAFETY)^SAFETY FSoE Connection 3 Send Message^Message_11" VarB="Pub-Var-Safety^Outputs^VarData"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT Automation Protocol)^Box 11 (Subscriber)">
+				<Link VarA="Term 1 (EK1100)^Term 8 (ELM7212-9018)^Module 1 (SAFETY)^SAFETY FSoE Connection 3 Receive Message^Message_11" VarB="Sub-Var-Safety^Inputs^VarData"/>
+			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^Term 1 (EK1100)^Term 8 (ELM7212-9018)">
 				<Link VarA="Term 1 (EK1100)^Term 4 (EL1918)^Module 1 (FSOE)^FSoE Inputs^FSOE" VarB="Module 1 (SAFETY)^SAFETY FSoE Connection 1 Receive Message^Message_3"/>
 				<Link VarA="Term 1 (EK1100)^Term 4 (EL1918)^Module 1 (FSOE)^FSoE Outputs^FSOE" VarB="Module 1 (SAFETY)^SAFETY FSoE Connection 1 Send Message^Message_3"/>
