@@ -95,7 +95,7 @@ END_VAR
 IF NOT init THEN
 	FOR i := 1 TO AlarmEventParam.ALARM_MAX_COUNT DO
 		fb_observer.event_table.init_instance(
-			eventClass := TC_EVENT_CLASSES.UserEventClass,
+			eventClass := TC_EVENT_CLASSES.UserDefinedEventClass,
 			nEventId := AlarmDatabase[i].nEventId,
 			eSeverity := AlarmDatabase[i].eSeverity,
 			bWithConfirmation := AlarmDatabase[i].bWithConfirmation,
@@ -134,7 +134,7 @@ CASE lang_select_options OF
 	0: fb_observer.nLangId := 1033;
 	1: fb_observer.nLangId := 1041;
 END_CASE
-fb_observer(event_class := TC_EVENT_CLASSES.UserEventClass);
+fb_observer(event_class := TC_EVENT_CLASSES.UserDefinedEventClass);
 
 // 表示用の変数制御　（アクティブアラーム数、未確認アラーム数、ボタン点滅制御、リセット可能状態）
 active_count := fb_observer.event_table.active_event_count;

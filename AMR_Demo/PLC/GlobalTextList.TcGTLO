@@ -71,6 +71,11 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"876"</v>
+              <v n="TextDefault">"Start"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"682"</v>
               <v n="TextDefault">"Warningレベル"</v>
               <l n="LanguageTexts" t="ArrayList" />
