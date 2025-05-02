@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.12">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="MAIN" Id="{51fb128e-0b29-449f-81b5-c1bdf5c46aab}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
+	
 	
 	stAxis				: ARRAY[1..2] OF AXIS_REF;
 	fbMcPower			: ARRAY[1..2] OF MC_Power;
@@ -22,6 +23,8 @@ VAR
 	
 	bWarningSigna0l		AT%I*	: BOOL;
 	bWarningSigna02		AT%I*	: BOOL;
+	Enc2ActError		AT%I*	: BOOL;
+	Enc2CmdError		AT%I*	: BOOL;
 	
 	lrOverride		: LREAL := 50;
 	lrVelocity		: LREAL := 360;
@@ -35,6 +38,7 @@ VAR
 	udiTimeIntervel		: UDINT;
 	udiCycleCount		: UDINT;
 	fbDelaySampling		: FB_DelaySampling;
+	fbDelaySamplingSet	: FB_DelaySampling;
 	
 	diPositionAct			: DINT;
 	diPositionBufferAct		: DINT;
@@ -43,6 +47,8 @@ VAR
 	
 	Mode	: INT;
 	i		: INT;
+	_Mode	: INT;
+	mode_change_delay_timer	: TON := (PT := T#1S);
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -124,25 +130,17 @@ fbDelaySamplingSet(udiDelaySampling:= udiCycleCount, diData:= diPositionCmd, diO
 // Alarm signal
 
 IF AlarmManager.init THEN
-	FOR i := 1 TO TO_INT(AlarmEventParam.ALARM_MAX_COUNT) DO
-		GVL.fb_alarm[i]^.set_activate := FALSE;
-	END_FOR
-	
-	CASE Mode OF
-		AreaStatus.Warning_Level1:
-			GVL.fb_alarm[AlarmList.approach]^.set_activate := TRUE;
-		AreaStatus.Warning_Level2:
-			GVL.fb_alarm[AlarmList.proximity]^.set_activate := TRUE;
-		AreaStatus.Hazard:
-			GVL.fb_alarm[AlarmList.collision]^.set_activate := TRUE;
-	END_CASE
+	IF mode_change_delay_timer.Q THEN
+		GVL.fb_alarm[AlarmList.approach]^.set_activate := Mode = AreaStatus.Warning_Level1;
+		GVL.fb_alarm[AlarmList.proximity]^.set_activate := Mode = AreaStatus.Warning_Level2;
+		GVL.fb_alarm[AlarmList.collision]^.set_activate :=  Mode = AreaStatus.Hazard;
+	END_IF
 END_IF
 
+mode_change_delay_timer(IN := Mode = _Mode);
+_Mode := Mode;
 AlarmManager();
 ]]></ST>
     </Implementation>
-    <LineIds Name="MAIN">
-      <LineId Id="1" Count="93" />
-    </LineIds>
   </POU>
 </TcPlcObject>
