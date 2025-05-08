@@ -1444,6 +1444,24 @@ External Setpoint Generation:
 			</Relations>
 		</DataType>
 		<DataType>
+			<Name GUID="{3D778266-9CB6-A2BC-B908-FC747FC8D738}" IecBaseType="true" AutoDeleteType="true">ARRAY [1..2] OF BOOL</Name>
+			<BitSize>16</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+			<ArrayInfo>
+				<LBound>1</LBound>
+				<Elements>2</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{481A0C15-D2DB-59F6-F498-C30AA9C1998C}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..7] OF BOOL</Name>
+			<BitSize>64</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>8</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
 			<Name GUID="{18071995-0000-0000-0000-002000000010}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..1] OF BYTE</Name>
 			<BitSize>16</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
@@ -2019,7 +2037,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{2DFE7A75-9361-4018-9E9B-9E9C9C2E9DC6}" Name="PLC" PrjFilePath="PLC\PLC.plcproj" TmcFilePath="PLC\PLC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{6D1392B5-40FC-1CEB-4406-CB3DD8A3CAE8}" TmcPath="PLC\PLC.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{70CCCF8A-ECB4-7B3E-039B-69C2899E2EAF}" TmcPath="PLC\PLC.tmc">
 					<Name>PLC Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" AreaNo="1">
@@ -2052,9 +2070,25 @@ External Setpoint Generation:
 							<Name>MAIN.stAxis[2].PlcToNc</Name>
 							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 						</Var>
+						<Var>
+							<Name>MAIN.eap_export_information</Name>
+							<Type GUID="{481A0C15-D2DB-59F6-F498-C30AA9C1998C}">ARRAY [0..7] OF BOOL</Type>
+						</Var>
 					</Vars>
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
+						<Var>
+							<Name>MAIN.SafetyMonitorSetSpeed</Name>
+							<Type>DINT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.SafetyMonitorSpeed</Name>
+							<Type>DINT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.SafetyRefMonitorSpeed</Name>
+							<Type>DINT</Type>
+						</Var>
 						<Var>
 							<Name>MAIN.bMcReset</Name>
 							<Type>BOOL</Type>
@@ -2076,12 +2110,26 @@ External Setpoint Generation:
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
+							<Name>MAIN.safety_input_collision_sensor</Name>
+							<Comment><![CDATA[_Mode	: INT;
+mode_change_delay_timer	: TON := (PT := T#1S);]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.safety_master_station_emo</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
 							<Name>MAIN.stAxis[1].NcToPlc</Name>
 							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.stAxis[2].NcToPlc</Name>
 							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.safety_emo</Name>
+							<Type GUID="{3D778266-9CB6-A2BC-B908-FC747FC8D738}">ARRAY [1..2] OF BOOL</Type>
 						</Var>
 					</Vars>
 					<UnrestoredVarLinks ImportTime="2025-04-25T13:05:56">
@@ -3759,7 +3807,7 @@ External Setpoint Generation:
 							<SyncMan>001a00002400000003000000000000000000001a24000000</SyncMan>
 							<SyncMan>001c00002000000004000000000000000000001c20000000</SyncMan>
 							<SyncMan>001e24002400010003000000000000000a00001e24010000</SyncMan>
-							<SyncMan>001f1a002000010004000000000000000a00001f20010000</SyncMan>
+							<SyncMan>001f26002000010004000000000000000a00001f20010000</SyncMan>
 							<Fmmu>0000000000000000001200020100000001000000060000000200000000000000</Fmmu>
 							<Fmmu>0000000000000000001600010100000002000000060000000300000000000000</Fmmu>
 							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
@@ -5187,6 +5235,15 @@ Bit 8 - 15 : reserved]]></Comment>
 								<Entry BitLen="6">
 									<Type GUID="{18071995-0000-0000-0000-002000000006}">ARRAY [0..5] OF BIT</Type>
 								</Entry>
+								<Entry Name="Standard Out Var 12" BitLen="32" Index="#xf60a" Sub="#x01">
+									<Type>DINT</Type>
+								</Entry>
+								<Entry Name="Standard Out Var 13" BitLen="32" Index="#xf60a" Sub="#x02">
+									<Type>DINT</Type>
+								</Entry>
+								<Entry Name="Standard Out Var 14" BitLen="32" Index="#xf60a" Sub="#x03">
+									<Type>DINT</Type>
+								</Entry>
 							</Pdo>
 							<Pdo Name="SAFETY Function Block Info Data" Index="#x1ab1" Flags="#x0080" SyncUnit="2"/>
 							<Pdo Name="SAFETY Connection Info Data" Index="#x1ab6" Flags="#x0080" SyncMan="7" SyncUnit="2">
@@ -5537,8 +5594,8 @@ Bit 8 - 15 : reserved]]></Comment>
 							<Type>UINT</Type>
 						</Var>
 					</Vars>
-					<Eap InOut="1" Publisher="054543fa0101" ArpRetryInterval="1000">
-						<EapVar Id="1" VarInOut="1" NvId="1" NvLength="6">
+					<Eap InOut="1" Publisher="052f4a420101" ArpRetryInterval="1000">
+						<EapVar Id="1" VarInOut="1" NvId="2" NvLength="6">
 							<Name>Pub-Var-Safety</Name>
 							<ImageId>97</ImageId>
 							<Vars VarGrpType="1">
@@ -5588,7 +5645,7 @@ Bit 8 - 15 : reserved]]></Comment>
 							<BitOffs>80</BitOffs>
 						</Var>
 					</Vars>
-					<Eap Publisher="052f4a420301">
+					<Eap Publisher="052f4a420101">
 						<EapVar Id="1" NvId="1" NvLength="6">
 							<Name>Sub-Var-Safety</Name>
 							<ImageId>98</ImageId>
@@ -5633,17 +5690,77 @@ Bit 8 - 15 : reserved]]></Comment>
 						</EapVar>
 					</Eap>
 				</Box>
+				<Box Id="12" BoxType="9051">
+					<Name>Box 12 (Publisher)</Name>
+					<ImageId>99</ImageId>
+					<Vars VarGrpType="1">
+						<Name>Inputs</Name>
+						<Var BoxStateVariable="true">
+							<Name>FrameState</Name>
+							<Comment><![CDATA[0x0001 = Not sent (frame skipped)
+0x0002 = Error (frame oversized)
+0x0004 = Subscriber missing (Unicast only)
+]]></Comment>
+							<Type>UINT</Type>
+							<BitOffs>144</BitOffs>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2">
+						<Name>Outputs</Name>
+						<Var BoxStateVariable="true">
+							<Name>FrameCtrl</Name>
+							<Comment><![CDATA[0x0001 = Disable sending
+0x0002 = Remove destination MAC from ARP cache
+]]></Comment>
+							<Type>UINT</Type>
+							<BitOffs>112</BitOffs>
+						</Var>
+					</Vars>
+					<Eap InOut="1" Publisher="052f4a420101" ArpRetryInterval="1000">
+						<EapVar Id="2" VarInOut="1" NvId="11" NvLength="8">
+							<Name>Pub-Var 11</Name>
+							<ImageId>97</ImageId>
+							<Vars VarGrpType="1">
+								<Name>Inputs</Name>
+								<Var BoxStateVariable="true">
+									<Name>VarState</Name>
+									<Comment><![CDATA[0x0001 = Not sent (variable skipped)
+]]></Comment>
+									<Type>UINT</Type>
+									<BitOffs>160</BitOffs>
+								</Var>
+							</Vars>
+							<Vars VarGrpType="2">
+								<Name>Outputs</Name>
+								<Var BoxStateVariable="true">
+									<Name>VarCtrl</Name>
+									<Comment><![CDATA[0x0001 = Disable publishing
+]]></Comment>
+									<Type>UINT</Type>
+									<BitOffs>128</BitOffs>
+								</Var>
+								<Var>
+									<Name>VarData</Name>
+									<Type GUID="{481A0C15-D2DB-59F6-F498-C30AA9C1998C}">ARRAY [0..7] OF BOOL</Type>
+									<BitOffs>144</BitOffs>
+								</Var>
+							</Vars>
+						</EapVar>
+					</Eap>
+				</Box>
 				<Ethernet DeviceDesc="igb0"/>
 				<Eap EapDeviceGuid="{4EDBBB4F-1127-4107-A93A-6F031626FCEB}"/>
 			</Device>
 		</Io>
 	</Project>
 	<Mappings>
-		<MappingInfo Identifier="{00000000-2001-0850-0020-500821000403}" Id="#x02030030"/>
+		<MappingInfo Identifier="{00000000-2001-0850-0020-500821000403}" Id="#x02030050"/>
+		<MappingInfo Identifier="{00000000-2001-0850-0020-500850000403}" Id="#x02030060"/>
 		<MappingInfo Identifier="{00000000-0030-0304-1000-040330000403}" Id="#x02030020"/>
 		<MappingInfo Identifier="{00000000-0040-0304-1000-040342000403}" Id="#x02030040"/>
-		<MappingInfo Identifier="{05000010-2001-0850-1000-040300205008}" Id="#x02030050" Watchdog="14000000040000000400000004000000"/>
+		<MappingInfo Identifier="{05000010-2001-0850-1000-040300205008}" Id="#x02030070" Watchdog="14000000040000000400000004000000"/>
 		<MappingInfo Identifier="{03040020-0020-0304-2000-040320000403}" Id="#x02030010" Watchdog="04000000040000000400000004000000"/>
+		<MappingInfo Identifier="{03040020-0050-0304-2000-040350000403}" Id="#x02030030" Watchdog="04000000040000000400000004000000"/>
 		<OwnerA Name="TIID^Device 2 (EtherCAT)">
 			<OwnerB Name="TIID^Device 1 (EtherCAT Automation Protocol)^Box 10 (Publisher)">
 				<Link VarA="Term 1 (EK1100)^Term 8 (ELM7212-9018)^Module 1 (SAFETY)^SAFETY FSoE Connection 3 Send Message^Message_11" VarB="Pub-Var-Safety^Outputs^VarData"/>
@@ -5693,6 +5810,12 @@ Bit 8 - 15 : reserved]]></Comment>
 			</OwnerB>
 		</OwnerA>
 		<OwnerA Name="TIPC^PLC^PLC Instance">
+			<OwnerB Name="TIID^Device 1 (EtherCAT Automation Protocol)^Box 11 (Subscriber)">
+				<Link VarA="PlcTask Inputs^MAIN.safety_master_station_emo" VarB="Sub-Var-Safety^Inputs^VarData^FSoE Data[0]"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT Automation Protocol)^Box 12 (Publisher)">
+				<Link VarA="PlcTask Outputs^MAIN.eap_export_information" VarB="Pub-Var 11^Outputs^VarData"/>
+			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^Term 1 (EK1100)^Term 2 (EL1012)">
 				<Link VarA="PlcTask Inputs^MAIN.bWarningSigna02" VarB="Channel 1^Input"/>
 				<Link VarA="PlcTask Inputs^MAIN.bWarningSigna0l" VarB="Channel 2^Input"/>
@@ -5700,9 +5823,17 @@ Bit 8 - 15 : reserved]]></Comment>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^Term 1 (EK1100)^Term 3 (EL1004)">
 				<Link VarA="PlcTask Inputs^MAIN.bMcReset" VarB="Channel 1^Input"/>
 			</OwnerB>
+			<OwnerB Name="TIID^Device 2 (EtherCAT)^Term 1 (EK1100)^Term 4 (EL1918)">
+				<Link VarA="PlcTask Inputs^MAIN.safety_emo[1]" VarB="Module 1 (FSOE)^FSoE Inputs^FSOE^FSIN Module 1.Input"/>
+				<Link VarA="PlcTask Inputs^MAIN.safety_emo[2]" VarB="Module 1 (FSOE)^FSoE Inputs^FSOE^FSIN Module 2.Input"/>
+				<Link VarA="PlcTask Inputs^MAIN.safety_input_collision_sensor" VarB="Module 1 (FSOE)^FSoE Inputs^FSOE^FSIN Module 4.Input"/>
+			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^Term 1 (EK1100)^Term 8 (ELM7212-9018)">
 				<Link VarA="PlcTask Inputs^MAIN.Enc2ActError" VarB="Module 1 (SAFETY)^SAFETY Standard Inputdata^Standard Out Var 10"/>
 				<Link VarA="PlcTask Inputs^MAIN.Enc2CmdError" VarB="Module 1 (SAFETY)^SAFETY Standard Inputdata^Standard Out Var 9"/>
+				<Link VarA="PlcTask Inputs^MAIN.SafetyMonitorSetSpeed" VarB="Module 1 (SAFETY)^SAFETY Standard Inputdata^Standard Out Var 14"/>
+				<Link VarA="PlcTask Inputs^MAIN.SafetyMonitorSpeed" VarB="Module 1 (SAFETY)^SAFETY Standard Inputdata^Standard Out Var 12"/>
+				<Link VarA="PlcTask Inputs^MAIN.SafetyRefMonitorSpeed" VarB="Module 1 (SAFETY)^SAFETY Standard Inputdata^Standard Out Var 13"/>
 				<Link VarA="PlcTask Outputs^MAIN.bSafetyErrAck" VarB="Module 1 (SAFETY)^SAFETY Standard Outputdata^Standard In Var 1"/>
 				<Link VarA="PlcTask Outputs^MAIN.bSafetyReset" VarB="Module 1 (SAFETY)^SAFETY Standard Outputdata^Standard In Var 7"/>
 				<Link VarA="PlcTask Outputs^MAIN.bSafetyRun" VarB="Module 1 (SAFETY)^SAFETY Standard Outputdata^Standard In Var 2"/>

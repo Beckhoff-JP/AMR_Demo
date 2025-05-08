@@ -5,7 +5,7 @@
       <Data>
         <o xml:space="preserve" t="VisualObject">
           <n n="LastVisuLanguageModelEntry" />
-          <v n="UniqueIdGenerator">"37"</v>
+          <v n="UniqueIdGenerator">"46"</v>
           <o n="VisualElemList" t="VisualElemList">
             <l n="VisualElementList" t="VisualElemCollection" cet="GenericVisualElem">
               <o>
@@ -83,15 +83,15 @@
                     </o>
                     <o>
                       <v n="Id">1649127785L</v>
-                      <v n="Value">664</v>
+                      <v n="Value">687</v>
                     </o>
                     <o>
                       <v n="Id">357335551L</v>
-                      <v n="Value">132</v>
+                      <v n="Value">228</v>
                     </o>
                     <o>
                       <v n="Id">2422045748L</v>
-                      <v n="Value">117</v>
+                      <v n="Value">87</v>
                     </o>
                     <o>
                       <v n="Id">2134141914L</v>
@@ -140,11 +140,11 @@
                     </o>
                     <o>
                       <v n="Id">550940142L</v>
-                      <v n="Value">722</v>
+                      <v n="Value">730</v>
                     </o>
                     <o>
                       <v n="Id">1473355128L</v>
-                      <v n="Value">153</v>
+                      <v n="Value">249</v>
                     </o>
                     <o>
                       <v n="Id">493260384L</v>
@@ -281,15 +281,15 @@
                     </o>
                     <o>
                       <v n="Id">1649127785L</v>
-                      <v n="Value">664</v>
+                      <v n="Value">687</v>
                     </o>
                     <o>
                       <v n="Id">357335551L</v>
-                      <v n="Value">202</v>
+                      <v n="Value">298</v>
                     </o>
                     <o>
                       <v n="Id">2422045748L</v>
-                      <v n="Value">117</v>
+                      <v n="Value">87</v>
                     </o>
                     <o>
                       <v n="Id">2134141914L</v>
@@ -338,11 +338,11 @@
                     </o>
                     <o>
                       <v n="Id">550940142L</v>
-                      <v n="Value">722</v>
+                      <v n="Value">730</v>
                     </o>
                     <o>
                       <v n="Id">1473355128L</v>
-                      <v n="Value">224</v>
+                      <v n="Value">320</v>
                     </o>
                     <o>
                       <v n="Id">493260384L</v>
@@ -420,19 +420,19 @@
                     </o>
                     <o>
                       <v n="Id">1649127785L</v>
-                      <v n="Value">15</v>
+                      <v n="Value">11</v>
                     </o>
                     <o>
                       <v n="Id">357335551L</v>
-                      <v n="Value">7</v>
+                      <v n="Value">59</v>
                     </o>
                     <o>
                       <v n="Id">2422045748L</v>
-                      <v n="Value">622</v>
+                      <v n="Value">666</v>
                     </o>
                     <o>
                       <v n="Id">2134141914L</v>
-                      <v n="Value">325</v>
+                      <v n="Value">389</v>
                     </o>
                     <o>
                       <v n="Id">363316305L</v>
@@ -2893,11 +2893,11 @@
                     </o>
                     <o>
                       <v n="Id">1649127785L</v>
-                      <v n="Value">664</v>
+                      <v n="Value">691</v>
                     </o>
                     <o>
                       <v n="Id">357335551L</v>
-                      <v n="Value">24</v>
+                      <v n="Value">121</v>
                     </o>
                     <o>
                       <v n="Id">2422045748L</v>
@@ -3067,15 +3067,15 @@
                     </o>
                     <o>
                       <v n="Id">1649127785L</v>
-                      <v n="Value">651</v>
+                      <v n="Value">687</v>
                     </o>
                     <o>
                       <v n="Id">357335551L</v>
-                      <v n="Value">60</v>
+                      <v n="Value">156</v>
                     </o>
                     <o>
                       <v n="Id">2422045748L</v>
-                      <v n="Value">136</v>
+                      <v n="Value">87</v>
                     </o>
                     <o>
                       <v n="Id">2134141914L</v>
@@ -3237,15 +3237,15 @@
                     </o>
                     <o>
                       <v n="Id">1649127785L</v>
-                      <v n="Value">664</v>
+                      <v n="Value">687</v>
                     </o>
                     <o>
                       <v n="Id">357335551L</v>
-                      <v n="Value">269</v>
+                      <v n="Value">365</v>
                     </o>
                     <o>
                       <v n="Id">2422045748L</v>
-                      <v n="Value">117</v>
+                      <v n="Value">87</v>
                     </o>
                     <o>
                       <v n="Id">2134141914L</v>
@@ -3294,11 +3294,11 @@
                     </o>
                     <o>
                       <v n="Id">550940142L</v>
-                      <v n="Value">722</v>
+                      <v n="Value">730</v>
                     </o>
                     <o>
                       <v n="Id">1473355128L</v>
-                      <v n="Value">290</v>
+                      <v n="Value">386</v>
                     </o>
                     <o>
                       <v n="Id">493260384L</v>
@@ -3357,6 +3357,144 @@
                 <v n="AnimationDuration">"0"</v>
                 <v n="BringToForeground">""</v>
                 <v n="ElementVersion" t="Byte">0</v>
+                <n n="TabOrder" />
+              </o>
+              <o>
+                <a n="ConfiguredComplexInputs" et="ComplexInput" />
+                <l n="Elements" t="ArrayList" />
+                <n n="VisualElementDescription" />
+                <o n="VisualElemMemberList" t="VisualElemMemberList">
+                  <l n="VisualElemMemberList" t="VisualElemMemberCollection" cet="VisualElemMember">
+                    <o>
+                      <v n="Id">2340015797L</v>
+                      <v n="Value">"HCENTER"</v>
+                    </o>
+                    <o>
+                      <v n="Id">2565699834L</v>
+                      <v n="Value">"VCENTER"</v>
+                    </o>
+                    <o>
+                      <v n="Id">4134387352L</v>
+                      <v n="Value">"NONE"</v>
+                    </o>
+                    <o>
+                      <v n="Id">1603690730L</v>
+                      <v n="Value">"Arial"</v>
+                    </o>
+                    <o>
+                      <v n="Id">4253639993L</v>
+                      <v n="Value" t="Int16">12</v>
+                    </o>
+                    <o>
+                      <v n="Id">2729990903L</v>
+                      <v n="Value">0U</v>
+                    </o>
+                    <o>
+                      <v n="Id">1213979116L</v>
+                      <v n="Value">0U</v>
+                    </o>
+                    <o>
+                      <v n="Id">3488306084L</v>
+                      <v n="Value">4278190080U</v>
+                    </o>
+                    <o>
+                      <v n="Id">663104332L</v>
+                      <v n="Value">4278190080U</v>
+                    </o>
+                    <o>
+                      <v n="Id">2812299069L</v>
+                      <v n="Value">4294967295U</v>
+                    </o>
+                    <o>
+                      <v n="Id">494569607L</v>
+                      <v n="Value">4278190080U</v>
+                    </o>
+                    <o>
+                      <v n="Id">3719097617L</v>
+                      <v n="Value">0</v>
+                    </o>
+                    <o>
+                      <v n="Id">1649127785L</v>
+                      <v n="Value">0</v>
+                    </o>
+                    <o>
+                      <v n="Id">357335551L</v>
+                      <v n="Value">2</v>
+                    </o>
+                    <o>
+                      <v n="Id">2422045748L</v>
+                      <v n="Value">787</v>
+                    </o>
+                    <o>
+                      <v n="Id">2134141914L</v>
+                      <v n="Value">43</v>
+                    </o>
+                    <o>
+                      <v n="Id">390574330L</v>
+                      <v n="Value">"AMRに必要な 安全(PLd) + 制御 + ナビゲーション + IoT をOne IPCに統合"</v>
+                    </o>
+                    <o>
+                      <v n="Id">3729828405L</v>
+                      <l n="Value" t="ArrayList" cet="NamedStyleFont">
+                        <o>
+                          <v n="FontStyle">1</v>
+                          <v n="AdditionalFontStyle" t="UInt16">0</v>
+                          <v n="ExplicitColor">-16777216</v>
+                          <v n="CanonicalName">"Font-HeadingLarge"</v>
+                          <v n="FontName">"Tahoma"</v>
+                          <v n="DisplayName">""</v>
+                          <v n="FontSize">27</v>
+                          <v n="ScriptIdentification">0</v>
+                          <v n="DoubleFontSize" t="Double">0</v>
+                          <o n="NamedColor" t="NamedStyleColor">
+                            <v n="Color">-16777216</v>
+                            <v n="CanonicalName">"Font-Default-Color"</v>
+                          </o>
+                        </o>
+                      </l>
+                    </o>
+                    <o>
+                      <v n="Id">493260384L</v>
+                      <v n="Value">4294967295U</v>
+                    </o>
+                    <o>
+                      <v n="Id">135947015L</v>
+                      <v n="Value">4278190080U</v>
+                    </o>
+                    <o>
+                      <v n="Id">2678395525L</v>
+                      <v n="Value">1U</v>
+                    </o>
+                    <o>
+                      <v n="Id">571893170L</v>
+                      <v n="Value">""</v>
+                    </o>
+                    <o>
+                      <v n="Id">2597686782L</v>
+                      <v n="Value">true</v>
+                    </o>
+                    <o>
+                      <v n="Id">823443203L</v>
+                      <v n="Value">"778"</v>
+                    </o>
+                  </l>
+                </o>
+                <v n="VisualElementName">"Label"</v>
+                <v n="VisualElementTypeName">"VisuFbLabel"</v>
+                <v n="VisualElementIsRectangle">true</v>
+                <v n="VisualElementIdentifier">"GenElemInst_51"</v>
+                <n n="VisualElementOfflinePaintCommands" />
+                <n n="VisualElementFrameInformation" />
+                <d n="VisualElementInputActions" t="Hashtable" />
+                <v n="VisualElementIdentification">{9218432e-0b65-4e2d-a13e-a98a3b137f78}</v>
+                <v n="VisualElementOwningObjectGuid">{230483c7-8b30-4964-94b1-66195911bb3b}</v>
+                <a n="LMGuids" et="Guid" />
+                <d n="SubElements" t="Hashtable" />
+                <v n="VisualElementId">0</v>
+                <l n="UserManagementAccessRights" t="ArrayList" />
+                <v n="AnimationDuration">"0"</v>
+                <v n="BringToForeground">""</v>
+                <v n="ElementVersion" t="Byte">1</v>
                 <n n="TabOrder" />
               </o>
             </l>
@@ -3515,7 +3653,7 @@
             </o>
             <v n="DialogDut">{4fcd90f9-870d-4a06-9804-4aa70a43d452}</v>
           </o>
-          <v n="LastUsedIdForIdentifier">49</v>
+          <v n="LastUsedIdForIdentifier">51</v>
           <o n="TextDocument" t="TextDocument">
             <v n="TextBlobForSerialisation">"VAR_IN_OUT
 	
@@ -3540,17 +3678,17 @@ END_VAR"</v>
               <v>0</v>
               <o>
                 <v n="Width">787</v>
-                <v n="Height">332</v>
+                <v n="Height">448</v>
               </o>
               <v>1</v>
               <o>
-                <v n="Width">787</v>
-                <v n="Height">333</v>
+                <v n="Width">786</v>
+                <v n="Height">449</v>
               </o>
               <v>2</v>
               <o>
-                <v n="Width">787</v>
-                <v n="Height">333</v>
+                <v n="Width">786</v>
+                <v n="Height">449</v>
               </o>
             </d2>
             <v n="Version">2</v>

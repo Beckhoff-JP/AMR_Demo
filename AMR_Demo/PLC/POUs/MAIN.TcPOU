@@ -27,6 +27,7 @@ VAR
 	Enc2CmdError		AT%I*	: BOOL;
 	
 	lrOverride		: LREAL := 50;
+	_override		: LREAL;
 	lrVelocity		: LREAL := 360;
 	lrGearRate		: LREAL := 10;
 	lrIncrement		: LREAL := 1048576;
@@ -46,20 +47,46 @@ VAR
 	diPositionBufferCmd		: DINT;
 	
 	Mode	: INT;
-	i		: INT;
-	_Mode	: INT;
-	mode_change_delay_timer	: TON := (PT := T#1S);
+	i		: UINT;
+	//_Mode	: INT;
+	//mode_change_delay_timer	: TON := (PT := T#1S);
+	
+	safety_input_collision_sensor AT%I* : BOOL;
+	safety_master_station_emo AT%I* : BOOL;
+	safety_emo AT%I* : ARRAY [1..2] OF BOOL;
+	
+	running_startup_delapy : TON := (PT := T#1S);
+	
+	eap_export_information	AT%Q* : ARRAY [0..7] OF BOOL;
+	
+	monitor_speed_average : FB_MovingAverage;
+	monitor_refspeed_average : FB_MovingAverage;
+	monitor_setspeed_average : FB_MovingAverage;
+
+	SafetyMonitorSpeed AT%I* : DINT;
+	SafetyRefMonitorSpeed AT%I* : DINT;
+	SafetyMonitorSetSpeed AT%I* : DINT;
+	
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[
+// Set override speed to 25 while 1sec after motor starting up. Otherwise safety error would occured by speed differential watching.
+running_startup_delapy(IN := stAxis[1].Status.Moving);
+IF running_startup_delapy.Q THEN
+	_override := lrOverride;
+ELSE
+	_override := 30.0;
+END_IF
+
 FOR i:=1 TO 2 DO
+	stAxis[i].ReadStatus();
 	fbMcPower[i](
 	Axis:= stAxis[i], 
 	Enable:= bPower, 
 	Enable_Positive:= bPower, 
 	Enable_Negative:= bPower,
-	Override := lrOverride);
+	Override := _override);
 
 	fbMcHalt[i](
 		Axis:= stAxis[i], 
@@ -116,7 +143,7 @@ END_CASE
 lrWheelIncrement := lrIncrement * lrGearRate / 360;
 diPositionAct := LREAL_TO_DINT(-1 * stAxis[1].NcToPlc.ActPos * lrWheelIncrement / lrExtEncoderIncrement);
 diSpeedAct := diPositionAct - diPositionBufferAct; 
-diPositionCmd := LREAL_TO_DINT(-1 * stAxis[1].NcToPlc.ActPos * lrWheelIncrement / lrExtEncoderIncrement);
+diPositionCmd := LREAL_TO_DINT(-1 * stAxis[1].NcToPlc.SetPos * lrWheelIncrement / lrExtEncoderIncrement);
 diSpeedCmd := diPositionCmd - diPositionBufferCmd; 
 
 diTaskIdx := GETCURTASKINDEXEX();
@@ -130,15 +157,27 @@ fbDelaySamplingSet(udiDelaySampling:= udiCycleCount, diData:= diPositionCmd, diO
 // Alarm signal
 
 IF AlarmManager.init THEN
-	IF mode_change_delay_timer.Q THEN
-		GVL.fb_alarm[AlarmList.approach]^.set_activate := Mode = AreaStatus.Warning_Level1;
-		GVL.fb_alarm[AlarmList.proximity]^.set_activate := Mode = AreaStatus.Warning_Level2;
-		GVL.fb_alarm[AlarmList.collision]^.set_activate :=  Mode = AreaStatus.Hazard;
-	END_IF
+	GVL.fb_alarm[AlarmList.emergency_stop]^.set_activate := NOT safety_master_station_emo OR NOT safety_emo[1] OR NOT safety_emo[2];
+	GVL.fb_alarm[AlarmList.approach]^.set_activate := Mode = AreaStatus.Warning_Level1;
+	GVL.fb_alarm[AlarmList.proximity]^.set_activate := Mode = AreaStatus.Warning_Level2;
+	GVL.fb_alarm[AlarmList.collision]^.set_activate :=  stAxis[1].Status.Moving AND NOT safety_input_collision_sensor;
+	GVL.fb_alarm[AlarmList.encoder_error]^.set_activate :=  bPower AND ( NOT Enc2ActError OR NOT Enc2CmdError );
+
+	// Send state to CP6606 controller station
+	FOR i := 0 TO 7 DO
+		IF i < AlarmEventParam.ALARM_MAX_COUNT THEN
+			eap_export_information[i] := GVL.fb_alarm[i + 1]^.bActive;
+		END_IF
+	END_FOR
+	eap_export_information[5] := NOT stAxis[1].Status.Disabled;
+	eap_export_information[6] := stAxis[1].Status.Moving;	
 END_IF
 
-mode_change_delay_timer(IN := Mode = _Mode);
-_Mode := Mode;
+monitor_speed_average(put := SafetyMonitorSpeed);
+monitor_refspeed_average(put := SafetyRefMonitorSpeed);
+monitor_setspeed_average(put := SafetyMonitorSetSpeed);
+
+AlarmManager.reset_button_input := bMcReset;
 AlarmManager();
 ]]></ST>
     </Implementation>

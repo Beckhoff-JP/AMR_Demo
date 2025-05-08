@@ -2,6 +2,12 @@
 <TcPlcObject Version="1.1.0.1">
   <POU Name="AlarmManager" Id="{e50722e7-a418-407a-b272-768f63da7eec}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM AlarmManager
+VAR_INPUT
+	// input FROM HMI
+	confirm_button_input		: BOOL;
+	reset_button_input			: BOOL;
+	history_clear_button_input	: BOOL;
+END_VAR
 VAR_OUTPUT
 	init : BOOL;	
 END_VAR
@@ -19,10 +25,7 @@ VAR
 	error_argument				: INT := 0;
 	error_code_random			: DRAND; 
 
-	// input FROM HMI
-	confirm_button_input		: BOOL;
-	reset_button_input			: BOOL;
-	history_clear_button_input	: BOOL;
+
 	history_clear_delay_timer	: TON;
 
 	// output to HMI
@@ -72,18 +75,18 @@ VAR
 		),
 		(	nEventId := 3, 
 			eSeverity := 1, 
-			bWithConfirmation := FALSE,
+			bWithConfirmation := TRUE,
 			bWithResetOperation := FALSE
 		),
 		(	nEventId := 4, 
 			eSeverity := 2, 
-			bWithConfirmation := FALSE,
+			bWithConfirmation := TRUE,
 			bWithResetOperation := FALSE
 		),
 		(	nEventId := 5, 
 			eSeverity := 3, 
-			bWithConfirmation := FALSE,
-			bWithResetOperation := FALSE
+			bWithConfirmation := TRUE,
+			bWithResetOperation := TRUE
 		)
 	];
 END_VAR

@@ -600,7 +600,7 @@
               <v n="StartVisu">"Visualization"</v>
               <v n="HtmFileName">"webvisu"</v>
               <v n="MainStartHtm">true</v>
-              <v n="UpdateRate">200</v>
+              <v n="UpdateRate">50</v>
               <v n="CommBufferSize">50000</v>
               <v n="BestFit">true</v>
               <v n="ClientSizeMode" t="VisualClientSizeMode">AutoDetect</v>

@@ -2,7 +2,7 @@
 <TcPlcObject Version="1.1.0.1">
   <Task Name="VISU_TASK" Id="{cd7e9171-7f35-46ae-928f-55b6a9fa6189}">
     <!--CycleTime in micro seconds.-->
-    <CycleTime>200000</CycleTime>
+    <CycleTime>50</CycleTime>
     <Priority>30</Priority>
     <PouCall>
       <Name>VisuElems.Visu_Prg</Name>
