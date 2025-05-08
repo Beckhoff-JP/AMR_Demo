@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_MovingAverage" Id="{284934e6-b962-474a-9ee1-9ed3b61ddb2a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_MovingAverage
+VAR_INPUT
+	put : DINT;
+END_VAR
+VAR_OUTPUT
+	get : DINT;
+END_VAR
+VAR
+	//buffer : ARRAY [1..1024] OF DINT;
+	//i : UINT;
+	tmp : LREAL;
+	data_count : LREAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF data_count < 16 THEN
+	data_count := data_count + 1;
+END_IF
+tmp := (data_count * tmp + TO_LREAL(put)) / (data_count + 1);
+get := TO_DINT(tmp);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
