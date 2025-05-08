@@ -592,7 +592,7 @@
         <Type n="VisualManagerViewSettings">{ec9b2ec6-92a2-4856-be72-7866fb274c64}</Type>
       </TypeList>
     </XmlArchive>
-    <WebVisu Name="WebVisu" Id="{cb14e2c6-0e88-471c-83d3-01704d16054b}">
+    <WebVisu Name="WebVisu" Id="{cc01e234-0021-449d-bcc5-db87ba66ccc0}">
       <XmlArchive>
         <Data>
           <o xml:space="preserve" t="WebVisualizationObject">
@@ -600,7 +600,7 @@
               <v n="StartVisu">"Visualization"</v>
               <v n="HtmFileName">"webvisu"</v>
               <v n="MainStartHtm">true</v>
-              <v n="UpdateRate">50</v>
+              <v n="UpdateRate">100</v>
               <v n="CommBufferSize">50000</v>
               <v n="BestFit">true</v>
               <v n="ClientSizeMode" t="VisualClientSizeMode">AutoDetect</v>

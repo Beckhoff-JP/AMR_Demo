@@ -24,9 +24,11 @@ pyadsによりTwinCAT内のPLCの変数の値変化をNotificationにより受�
 
 このスクリプトは、 [TwinCATのEvent loggerを用いたライブラリ](https://github.com/Beckhoff-JP/MachineAlarmManagement) を使って、イベントを発行するたびにEventIDに応じたmp3音声ファイルを再生するPythonスクリプトを同梱しています。
 
-"""
-python_sound/twincatsound/tc_alarm_sound.py
-"""
+`python_sound/twincatsound/tc_alarm_sound.py`
 
 このスクリプトは、TwinCAT/BSD上からその上位ディレクトリにある twincatsound.sh を実行する事で起動します。
+
+# 準備
+
+`dependencies/MachineAlarmManager.library` をインストールしてください。
 
