@@ -101,10 +101,11 @@ FOR i:=1 TO 2 DO
 		Axis:= stAxis[i],
 		Execute:= bRun,
 		Velocity:= lrVelocity, 
-		Direction:= MC_Direction.MC_Positive_Direction, 
-		BufferMode:= MC_BufferMode.MC_Aborting);
+		//Direction:= MC_Direction.MC_Negative_Direction, 
+		BufferMode:= MC_BufferMode.MC_Aborting);	
 END_FOR
-
+fbMcMoveVelocity[1].Direction := MC_Direction.MC_Negative_Direction;
+fbMcMoveVelocity[2].Direction := MC_Direction.MC_Positive_Direction;
 
 bSafetyReset := bMcReset;
 bSafetyErrAck := bMcReset;
