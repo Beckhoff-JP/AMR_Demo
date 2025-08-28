@@ -5,8 +5,8 @@
   <Children>
     <Node>
       <Title>YT Scope Project</Title>
-      <Expanded>True</Expanded>
-      <FileName>C:\Users\YuyaK\Desktop\AMR\TwinCAT Measurement\YT Scope Project.tcscopex</FileName>
+      <Expanded>False</Expanded>
+      <FileName>C:\Users\YuyaK\Documents\#00_Document\#06_イベント\ロボデックス2025\AMR\AMR\TwinCAT Measurement\YT Scope Project.tcscopex</FileName>
       <Children>
         <Node>
           <Title>DataPool</Title>
@@ -29,12 +29,12 @@
         </Node>
         <Node>
           <Title>YT Chart</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
               <Title>Axis Group</Title>
-              <Expanded>True</Expanded>
+              <Expanded>False</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>

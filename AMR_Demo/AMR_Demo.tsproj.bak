@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.15" TcVersionFixed="true">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.17">
 	<Translations>
 		<Text TxtId="NewEventClass_DisplayText">
 			<Text LcId="1041"><![CDATA[アラーム定義]]></Text>
@@ -1752,8 +1752,8 @@ External Setpoint Generation:
 					<Name>Axis 1</Name>
 					<AxisPara>
 						<General UnitName="°"/>
-						<Dynamic Acceleration="1769.307" Deceleration="1769.307" Jerk="5307.921"/>
-						<Velo RefSearch="11.79538" RefSync="11.79538" SlowManual="58.9769" FastManual="353.8614" Fast="1179.538" Maximum="1179.538"/>
+						<Dynamic Acceleration="1769.31" Deceleration="1769.31" Jerk="5307.92"/>
+						<Velo RefSearch="11.79538" RefSync="11.79538" SlowManual="58.9769" FastManual="353.8614" Fast="1179.538" Maximum="1179.54"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
 					<Encoder Name="Enc" EncType="19">
@@ -2037,7 +2037,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{2DFE7A75-9361-4018-9E9B-9E9C9C2E9DC6}" Name="PLC" PrjFilePath="PLC\PLC.plcproj" TmcFilePath="PLC\PLC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{D358CD83-B8D9-0B73-89D6-8701F4B056BF}" TmcPath="PLC\PLC.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{0173E7E7-4568-6541-2760-14570350D205}" TmcPath="PLC\PLC.tmc">
 					<Name>PLC Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" AreaNo="1">
@@ -2082,6 +2082,14 @@ External Setpoint Generation:
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
+							<Name>MAIN.stAxis[1].NcToPlc</Name>
+							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.stAxis[2].NcToPlc</Name>
+							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
 							<Name>MAIN.bWarningSigna0l</Name>
 							<Type>BOOL</Type>
 						</Var>
@@ -2096,14 +2104,6 @@ External Setpoint Generation:
 						<Var>
 							<Name>MAIN.Enc2CmdError</Name>
 							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>MAIN.stAxis[1].NcToPlc</Name>
-							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>MAIN.stAxis[2].NcToPlc</Name>
-							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.safety_input_collision_sensor</Name>
@@ -3806,8 +3806,8 @@ mode_change_delay_timer	: TON := (PT := T#1S);]]></Comment>
 							<SyncMan>001614002000010004000000000000001400001620010000</SyncMan>
 							<SyncMan>001a00002400000003000000000000000000001a24000000</SyncMan>
 							<SyncMan>001c00002000000004000000000000000000001c20000000</SyncMan>
-							<SyncMan>001e24002400010003000000000000000a00001e24010000</SyncMan>
-							<SyncMan>001f26002000010004000000000000000a00001f20010000</SyncMan>
+							<SyncMan>001e1e002400010003000000000000000a00001e24010000</SyncMan>
+							<SyncMan>001f20002000010004000000000000000a00001f20010000</SyncMan>
 							<Fmmu>0000000000000000001200020100000001000000060000000200000000000000</Fmmu>
 							<Fmmu>0000000000000000001600010100000002000000060000000300000000000000</Fmmu>
 							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
@@ -5185,41 +5185,7 @@ Bit 8 - 15 : reserved]]></Comment>
 									<Type>UINT</Type>
 								</Entry>
 							</Pdo>
-							<Pdo Name="SAFETY FSoE Connection 3 Send Message" Index="#x1aa2" Flags="#x0080" SyncMan="7" SyncUnit="2">
-								<Entry Name="Message_11__FSoE Cmd" BitLen="8" Index="#x6220" Sub="#x01">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Message_11__Safe Data Byte 0[0]" BitLen="1" Index="#xf601" Sub="#x09">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Message_11__Safe Data Byte 0[1]" BitLen="1" Index="#xf601" Sub="#x0a">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Message_11__Safe Data Byte 0[2]" BitLen="1" Index="#xf601" Sub="#x0b">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Message_11__Safe Data Byte 0[3]" BitLen="1" Index="#xf601" Sub="#x0c">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Message_11__Safe Data Byte 0[4]" BitLen="1" Index="#xf601" Sub="#x0d">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Message_11__Safe Data Byte 0[5]" BitLen="1" Index="#xf601" Sub="#x0e">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Message_11__Safe Data Byte 0[6]" BitLen="1" Index="#xf601" Sub="#x0f">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Message_11__Safe Data Byte 0[7]" BitLen="1" Index="#xf601" Sub="#x10">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Message_11__FSoE CRC_0" BitLen="16" Index="#x6220" Sub="#x03">
-									<Type>UINT</Type>
-								</Entry>
-								<Entry Name="Message_11__FSoE ConnID" BitLen="16" Index="#x6220" Sub="#x02">
-									<Type>UINT</Type>
-								</Entry>
-							</Pdo>
+							<Pdo Name="SAFETY FSoE Connection 3 Send Message" Index="#x1aa2" Flags="#x0080" SyncUnit="2"/>
 							<Pdo Name="SAFETY FSoE Connection 4 Send Message" Index="#x1aa3" Flags="#x0080" SyncUnit="2"/>
 							<Pdo Name="SAFETY FSoE Connection 5 Send Message" Index="#x1aa4" Flags="#x0080" SyncUnit="2"/>
 							<Pdo Name="SAFETY FSoE Connection 6 Send Message" Index="#x1aa5" Flags="#x0080" SyncUnit="2"/>
@@ -5415,41 +5381,7 @@ Bit 8 - 15 : reserved]]></Comment>
 									<Type>UINT</Type>
 								</Entry>
 							</Pdo>
-							<Pdo Name="SAFETY FSoE Connection 3 Receive Message" Index="#x16a2" InOut="1" Flags="#x0080" SyncMan="6" SyncUnit="2">
-								<Entry Name="Message_11__FSoE Cmd" BitLen="8" Index="#x7220" Sub="#x01">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Message_11__Safe Data Byte 0[0]" BitLen="1" Index="#xf701" Sub="#x11">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Message_11__Safe Data Byte 0[1]" BitLen="1" Index="#xf701" Sub="#x12">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Message_11__Safe Data Byte 0[2]" BitLen="1" Index="#xf701" Sub="#x13">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Message_11__Safe Data Byte 0[3]" BitLen="1" Index="#xf701" Sub="#x14">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Message_11__Safe Data Byte 0[4]" BitLen="1" Index="#xf701" Sub="#x15">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Message_11__Safe Data Byte 0[5]" BitLen="1" Index="#xf701" Sub="#x16">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Message_11__Safe Data Byte 0[6]" BitLen="1" Index="#xf701" Sub="#x17">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Message_11__Safe Data Byte 0[7]" BitLen="1" Index="#xf701" Sub="#x18">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Message_11__FSoE CRC_0" BitLen="16" Index="#x7220" Sub="#x03">
-									<Type>UINT</Type>
-								</Entry>
-								<Entry Name="Message_11__FSoE ConnID" BitLen="16" Index="#x7220" Sub="#x02">
-									<Type>UINT</Type>
-								</Entry>
-							</Pdo>
+							<Pdo Name="SAFETY FSoE Connection 3 Receive Message" Index="#x16a2" InOut="1" Flags="#x0080" SyncUnit="2"/>
 							<Pdo Name="SAFETY FSoE Connection 4 Receive Message" Index="#x16a3" InOut="1" Flags="#x0080" SyncUnit="2"/>
 							<Pdo Name="SAFETY FSoE Connection 5 Receive Message" Index="#x16a4" InOut="1" Flags="#x0080" SyncUnit="2"/>
 							<Pdo Name="SAFETY FSoE Connection 6 Receive Message" Index="#x16a5" InOut="1" Flags="#x0080" SyncUnit="2"/>
@@ -5558,7 +5490,7 @@ Bit 8 - 15 : reserved]]></Comment>
 				</Box>
 				<EtherCAT DcSyncMode="3"/>
 			</Device>
-			<Device Id="1" DevType="112" AmsPort="28673" AmsNetId="5.69.67.250.2.1" RemoteName="Device 1 (EtherCAT Automation Protocol)">
+			<Device Id="1" Disabled="true" DevType="112" AmsPort="28673" AmsNetId="5.69.67.250.2.1" RemoteName="Device 1 (EtherCAT Automation Protocol)">
 				<Name>Device 1 (EtherCAT Automation Protocol)</Name>
 				<AddressInfo>
 					<Pnp>
@@ -5754,20 +5686,12 @@ Bit 8 - 15 : reserved]]></Comment>
 		</Io>
 	</Project>
 	<Mappings>
-		<MappingInfo Identifier="{00000000-2001-0850-0020-500821000403}" Id="#x02030050"/>
-		<MappingInfo Identifier="{00000000-2001-0850-0020-500850000403}" Id="#x02030060"/>
+		<MappingInfo Identifier="{00000000-2001-0850-0020-500821000403}" Id="#x02030030"/>
 		<MappingInfo Identifier="{00000000-0030-0304-1000-040330000403}" Id="#x02030020"/>
 		<MappingInfo Identifier="{00000000-0040-0304-1000-040342000403}" Id="#x02030040"/>
-		<MappingInfo Identifier="{05000010-2001-0850-1000-040300205008}" Id="#x02030070" Watchdog="14000000040000000400000004000000"/>
+		<MappingInfo Identifier="{05000010-2001-0850-1000-040300205008}" Id="#x02030050" Watchdog="14000000040000000400000004000000"/>
 		<MappingInfo Identifier="{03040020-0020-0304-2000-040320000403}" Id="#x02030010" Watchdog="04000000040000000400000004000000"/>
-		<MappingInfo Identifier="{03040020-0050-0304-2000-040350000403}" Id="#x02030030" Watchdog="04000000040000000400000004000000"/>
 		<OwnerA Name="TIID^Device 2 (EtherCAT)">
-			<OwnerB Name="TIID^Device 1 (EtherCAT Automation Protocol)^Box 10 (Publisher)">
-				<Link VarA="Term 1 (EK1100)^Term 8 (ELM7212-9018)^Module 1 (SAFETY)^SAFETY FSoE Connection 3 Send Message^Message_11" VarB="Pub-Var-Safety^Outputs^VarData"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 1 (EtherCAT Automation Protocol)^Box 11 (Subscriber)">
-				<Link VarA="Term 1 (EK1100)^Term 8 (ELM7212-9018)^Module 1 (SAFETY)^SAFETY FSoE Connection 3 Receive Message^Message_11" VarB="Sub-Var-Safety^Inputs^VarData"/>
-			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^Term 1 (EK1100)^Term 8 (ELM7212-9018)">
 				<Link VarA="Term 1 (EK1100)^Term 4 (EL1918)^Module 1 (FSOE)^FSoE Inputs^FSOE" VarB="Module 1 (SAFETY)^SAFETY FSoE Connection 1 Receive Message^Message_3"/>
 				<Link VarA="Term 1 (EK1100)^Term 4 (EL1918)^Module 1 (FSOE)^FSoE Outputs^FSOE" VarB="Module 1 (SAFETY)^SAFETY FSoE Connection 1 Send Message^Message_3"/>
